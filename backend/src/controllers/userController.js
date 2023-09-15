@@ -11,6 +11,12 @@ const create = async (req, res) => {
     return res.status(201).json();
 }
 
+const findById = async (req, res) => {
+    const { id } = req.params;
+    const { name, email } = await userModel.findById(id);
+    return res.status(200).json({name, email});
+}
+
 const deleteById = async (req, res) => {
     const { id } = req.params;
     await userModel.deleteById(id);
@@ -28,5 +34,6 @@ module.exports = {
     getAll,
     create,
     deleteById,
-    updateById
+    updateById,
+    findById
 };

@@ -1,37 +1,54 @@
-const connection = require('./connection');
+const { connectionMongoDb } = require("./connection");
+const { ObjectId } = require("mongodb");
+
+const database = "dashboard";
 
 const getAll = async () => {
-    const [users] = await connection.execute('SELECT * FROM users');
-    return users;
+  const db = await connectionMongoDb.connect();
+  const users = await db.db(database).collection("users").find().toArray();
+  return users;
 };
 
 const create = async (name, email, password) => {
-    await connection.execute(
-        'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
-        [name, email, password]
-    );
-    return true;
+  const db = await connectionMongoDb.connect();
+  await db
+    .db(database)
+    .collection("users")
+    .insertOne({ name, email, password });
+  return true;
+};
+
+const findById = async (id) => {
+  const db = await connectionMongoDb.connect();
+  const user = await db
+    .db(database)
+    .collection("users")
+    .findOne({ _id: new ObjectId(id) });
+  return user;
 };
 
 const deleteById = async (id) => {
-    await connection.execute(
-        'DELETE FROM users WHERE id = ?',
-        [id]
-    );
-    return true;
+  const db = await connectionMongoDb.connect();
+  await db
+    .db(database)
+    .collection("users")
+    .deleteOne({ _id: new ObjectId(id) });
+  return true;
 };
 
 const updateById = async (id, name, email, password) => {
-    await connection.execute(
-        'UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?',
-        [name, email, password, id]
-    );
-    return true;
+  const db = await connectionMongoDb.connect();
+  await db
+    .db(database)
+    .collection("users")
+    .updateOne({ _id: new ObjectId(id) }, { $set: { name, email, password } });
+  return true;
 };
 
 module.exports = {
-    getAll,
-    create,
-    deleteById,
-    updateById
+  getAll,
+  create,
+  deleteById,
+  updateById,
+  findById,
 };
