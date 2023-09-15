@@ -1,4 +1,3 @@
-
 // const client = require('../models/connectionMongo');
 
 //  const runQuery = async (req, res) => {
@@ -42,7 +41,5 @@
 //     await client.close();
 //   }
 // }
-
-
 
 // module.exports = { runQuery };

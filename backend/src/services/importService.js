@@ -1,7 +1,7 @@
-const axios = require('axios');
-const fs = require('fs');
+const axios = require("axios");
+const fs = require("fs");
 
-const importModel = require('../models/importModel');
+const importModel = require("../models/importModel");
 
 const downloadCsv = async ({ csvFileURL }) => {
   const localFilePath = `./tmp/${+new Date()}.csv`;
@@ -70,7 +70,14 @@ const createSubtitle = ({ headerRow, separator }) => {
   return subtitle;
 };
 
-const readCsv = async ({ filePath, separator, category, startPeriod, endPeriod, headerIndex }) => {
+const readCsv = async ({
+  filePath,
+  separator,
+  category,
+  startPeriod,
+  endPeriod,
+  headerIndex,
+}) => {
   const fileContent = fs.readFileSync(filePath, "utf8");
   const lines = fileContent.split("\n");
 

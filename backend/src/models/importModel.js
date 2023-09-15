@@ -9,5 +9,5 @@ const importCsv = async (document) => {
 };
 
 module.exports = {
-  importCsv
+  importCsv,
 };

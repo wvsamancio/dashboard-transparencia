@@ -11,10 +11,9 @@ const connectionMySql = mysql.createPool({
   database: process.env.MYSQL_DATABASE,
 });
 
-const connectionMongoDb = new MongoClient(
-  process.env.MONGODB_URI,
-  { monitorCommands: true }
-);
+const connectionMongoDb = new MongoClient(process.env.MONGODB_URI, {
+  monitorCommands: true,
+});
 
 connectionMongoDb.on("commandStarted", (event) =>
   console.debug(JSON.stringify(event.command))
