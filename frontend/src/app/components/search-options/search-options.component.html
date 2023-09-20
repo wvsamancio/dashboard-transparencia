@@ -1,0 +1,19 @@
+<div class="row m-2">
+    <div class="col">
+        <select class="form-select" aria-label="Campo CSV" [(ngModel)]="item.field" required>
+            <option *ngFor="let key of opt" value="{{ key }}">
+                {{ contents[0].subtitle[key] }}
+            </option>
+        </select>
+    </div>
+    <div class="col">
+        <select class="form-select" aria-label="Campo de Operação" [(ngModel)]="item.operation" required>
+            <option *ngFor="let operation of operations" value="{{ operation.value }}">
+                {{ operation.viewValue }}
+            </option>
+        </select>
+    </div>
+    <div class="col">
+        <input class="form-control" type="text" [(ngModel)]="item.value" required />
+    </div>
+</div>

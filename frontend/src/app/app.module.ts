@@ -12,14 +12,19 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 
 import { environment } from 'src/environments/environment';
 
+import { SearchOptionsComponent } from './components/search-options/search-options.component';
+
 import * as firebase from 'firebase/app';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 firebase.initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [
     AppComponent,
-    ImportComponent
+    ImportComponent,
+    SearchOptionsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
