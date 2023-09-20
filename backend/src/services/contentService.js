@@ -26,6 +26,7 @@ const buildDynamicPipeline = ({ query }) => {
     {
       $project: {
         category: 1,
+        subtitle: 1,
         filteredData: {
           $filter: {
             input: "$data",
