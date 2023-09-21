@@ -1,0 +1,12 @@
+.chart-container {
+  width: 100%; /* Chart will take the full width of its container */
+  max-width: 600px; /* You can set a maximum width if needed */
+  height: 400px; /* Set an initial height */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .chart-container {
+    height: 300px; /* Adjust the height for smaller screens */
+  }
+}

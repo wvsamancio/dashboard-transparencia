@@ -17,6 +17,9 @@ import { SearchOptionsComponent } from './components/search-options/search-optio
 import * as firebase from 'firebase/app';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { ChartComponent } from './chart/chart.component';
+
 firebase.initializeApp(environment.firebase);
 
 @NgModule({
@@ -24,10 +27,12 @@ firebase.initializeApp(environment.firebase);
     AppComponent,
     ImportComponent,
     SearchOptionsComponent,
-    DashboardComponent
+    DashboardComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
+    NgApexchartsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

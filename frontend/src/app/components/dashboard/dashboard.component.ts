@@ -9,7 +9,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 })
 export class DashboardComponent {
   public isLoaded: boolean = false;
-  public items: any[] = [{ field: '', operation: '', value: '' }];
+  public items: any[] = [{ field: 'receita', operation: 'eq', value: 'IRRF' }];
   public subtitle: any = {}
   public contents: any[] = [];
   public columns: any[] = [];
@@ -21,12 +21,17 @@ export class DashboardComponent {
   }
 
   onSubmit(): void {
+    this.isLoaded = false;
     const query = { query: this.items };
     this.dashboardService.dynamicQuery(query).subscribe({
       next: (next) => {
         this.subtitle = next[0].subtitle;
         this.columns = Object.keys(this.subtitle);
-        this.contents = next.map((each: any) => each.filteredData).flat();
+        this.contents = next.map((elem: any) => {
+          let startPeriod = elem.startPeriod.split("/")[2];
+          let endPeriod = elem.endPeriod.split("/")[2];
+          return elem.filteredData.map((item: any) => ({ ...item, startPeriod, endPeriod }));
+        }).flat();
         this.isLoaded = true;
       }
     });

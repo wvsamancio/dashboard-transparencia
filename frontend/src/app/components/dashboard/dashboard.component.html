@@ -3,42 +3,38 @@
         <div *ngFor="let item of items; let i = index">
             <app-search-options [item]="item"></app-search-options>
         </div>
-        <button type="button" (click)="addItemRow()">Adicionar</button>
-        <button type="submit">Criar</button>
-        <div class="col-1">
-            <button type="submit" class="btn btn-primary btn-md">
-                Enviar
-            </button>
+        <div class="row m-2">
+            <div>
+                <button type="button" class="btn btn-primary btn-md me-2" (click)="addItemRow()">Adicionar Mais
+                    campos</button>
+                <button type="submit" class="btn btn-primary btn-md">
+                    Buscar
+                </button>
+            </div>
         </div>
     </form>
 </div>
 
-
-<!-- table os contents -->
-<table class="table table-striped">
-    <thead>
-        <tr>
-
-        </tr>
-    </thead>
-    <tbody>
-
-    </tbody>
-</table>
-
 <div *ngIf="isLoaded">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col" *ngFor="let column of columns">
-                    {{ subtitle[column] }}
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let content of contents">
-                <td *ngFor="let column of columns">{{ content[column] }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="m-2">
+        <h2>Preview</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" *ngFor="let column of columns">
+                        {{ subtitle[column] }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let content of contents">
+                    <td *ngFor="let column of columns">{{ content[column] }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    <app-chart *ngIf="isLoaded" [chartContents]="contents" [chartSubtitle]="subtitle"></app-chart>
 </div>
