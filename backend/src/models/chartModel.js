@@ -3,60 +3,65 @@ const { ObjectId } = require("mongodb");
 
 const database = "dashboard";
 
-const getUsers = async () => {
+const getCharts = async () => {
   const db = await connectionMongoDb.connect();
-  const users = await db.db(database).collection("users").find().toArray();
-  return users;
+  const charts = await db.db(database).collection("charts").find().toArray();
+  return charts;
 };
 
-const create = async ({ name, email, password }) => {
+const create = async ({
+  category,
+  name,
+  description,
+  query,
+  dashboard,
+  userEmail,
+}) => {
   const db = await connectionMongoDb.connect();
-
   await db
     .db(database)
-    .collection("users")
-    .insertOne({ name, email, password });
+    .collection("charts")
+    .insertOne({ category, name, description, query, dashboard, userEmail });
   return true;
 };
 
 const findById = async (id) => {
   const db = await connectionMongoDb.connect();
-  const user = await db
+  const chart = await db
     .db(database)
-    .collection("users")
+    .collection("charts")
     .findOne({ _id: new ObjectId(id) });
-  return user;
-};
-
-const findByEmail = async (email) => {
-  const db = await connectionMongoDb.connect();
-  const user = await db.db(database).collection("users").findOne({ email });
-  return user ? true : false;
+  return chart;
 };
 
 const deleteById = async (id) => {
   const db = await connectionMongoDb.connect();
   await db
     .db(database)
-    .collection("users")
+    .collection("charts")
     .deleteOne({ _id: new ObjectId(id) });
   return true;
 };
 
-const updateById = async (id, { name, email, password }) => {
+const updateById = async (
+  id,
+  { category, name, description, query, dashboard, userEmail }
+) => {
   const db = await connectionMongoDb.connect();
   await db
     .db(database)
-    .collection("users")
-    .updateOne({ _id: new ObjectId(id) }, { $set: { name, email, password } });
+    .collection("charts")
+    .updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { category, name, description, query, dashboard, userEmail } }
+    );
   return true;
 };
 
 module.exports = {
-  getUsers,
+  getCharts,
   create,
   deleteById,
-  findByEmail,
-  updateById,
   findById,
+  updateById,
 };
