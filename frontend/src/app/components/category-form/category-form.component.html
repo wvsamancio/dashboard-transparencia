@@ -9,10 +9,11 @@
         <input type="text" class="form-control" placeholder="Descrição da categoria" aria-label="Descrição da categoria"
             id="validationDescription" name="description" #description="ngModel" [ngModel]="description.value">
     </div>
-    <div class="col-1">
-        <button [disabled]="categoryForm.invalid" type="submit" class="btn btn-primary btn-md">
+    <div>
+        <button [disabled]="categoryForm.invalid" type="submit" class="btn btn-outline-primary me-1">
             Enviar
         </button>
+        <button type="button" [routerLink]="['']" class="btn btn-outline-primary">Voltar</button>
     </div>
 </form>
 

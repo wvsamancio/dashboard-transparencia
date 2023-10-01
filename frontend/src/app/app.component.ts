@@ -12,9 +12,6 @@ export class AppComponent {
   constructor(private router: Router) { }
 
   returnHome() {
-    console.log('returnHome')
-    this.router.navigate(['/']); // Replace '/' with your home route path
+    this.router.navigate(['/']);
   }
-
-  submitSearch() { }
 }

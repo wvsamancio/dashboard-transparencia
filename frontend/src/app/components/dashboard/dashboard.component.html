@@ -3,21 +3,32 @@
         <div *ngFor="let item of items; let i = index">
             <app-search-options [item]="item"></app-search-options>
         </div>
-        <div class="row m-2">
-            <div>
-                <button type="button" class="btn btn-primary btn-md me-2" (click)="addItemRow()">Adicionar Mais
-                    campos</button>
-                <button type="submit" class="btn btn-primary btn-md">
-                    Buscar
-                </button>
+        <div class="mt-2">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-outline-primary me-1">
+                        Buscar dados
+                    </button>
+                    <button type="submit" [routerLink]="['']" class="btn btn-outline-primary">
+                        Voltar
+                    </button>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-outline-primary" (click)="addItemRow()">Adicionar mais
+                        campos</button>
+                    <button *ngIf="items.length > 1" type="button" class="btn btn-outline-danger ms-1"
+                        (click)="removeItemRow(1)">
+                        Remover
+                    </button>
+                </div>
             </div>
         </div>
     </form>
 </div>
 
 <div *ngIf="isLoaded">
-    <div class="m-2">
-        <h2>Preview</h2>
+    <div class="mt-4">
+        <h2>Dados:</h2>
         <table class="table table-hover">
             <thead>
                 <tr>

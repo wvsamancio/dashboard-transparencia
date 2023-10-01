@@ -20,6 +20,12 @@ export class DashboardComponent {
     this.items.push({ field: '', operation: '', value: '' });
   }
 
+  removeItemRow(index: number) {
+    if (this.items.length > 1) {
+      this.items.splice(index, 1);
+    }
+  }
+
   onSubmit(): void {
     this.isLoaded = false;
     const query = { query: this.items };

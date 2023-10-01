@@ -1,8 +1,5 @@
-<p>category works!</p>
-
 <div *ngIf="isLoaded">
     <div class="m-2">
-        <h2>Preview</h2>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -16,10 +13,11 @@
                     <td>{{ category.name }}</td>
                     <td>{{ category.description }}</td>
                     <td>
-                        <button type="button" class="btn btn-outline-danger">Gerenciar Relatórios</button>
-                        <button type="button" class="btn btn-outline-danger">Importar Dados</button>
-
-                        <button type="button" class="btn btn-outline-danger"
+                        <button type="button" [routerLink]="['/dashboard']"
+                            class="btn btn-outline-primary mx-1">Gráficos</button>
+                        <button type="button" [routerLink]="['/import']"
+                            class="btn btn-outline-primary mx-1">Dados</button>
+                        <button type="button" class="btn btn-outline-danger mx-1"
                             (click)="delete(category._id)">Delete</button>
                     </td>
                 </tr>
@@ -29,7 +27,5 @@
 </div>
 
 <div>
-    <button type="button" class="btn btn-outline-primary">Criar Categoria</button>
+    <button type="button" [routerLink]="['/categories']" class="btn btn-outline-primary">Criar categoria</button>
 </div>
-
-{{ categories | json }}

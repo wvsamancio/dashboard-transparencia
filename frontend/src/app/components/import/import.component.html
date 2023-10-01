@@ -1,29 +1,28 @@
 <form #importForm="ngForm" (ngSubmit)="onSubmit(importForm)">
-    <div class="row align-items-center m-2">
-        <div class="col-4">
-            <input class="form-control form-control-md" type="file" id="validationCsvPath" (change)="chooseFile($event)"
-                accept=".csv" />
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Categoria" aria-label="Categoria"
-                id="validationCategory" name="category" #category="ngModel" [ngModel]="category.value" />
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Data Inicial" aria-label="Período Inicial"
-                id="validationStartPeriod" name="startPeriod" #startPeriod="ngModel" [ngModel]="startPeriod.value" />
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Data final" aria-label="Período final"
-                id="validationEndPeriod" name="endPeriod" #endPeriod="ngModel" [ngModel]="endPeriod.value" />
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Index de Cabeçalho" aria-label="Index de Cabeçalho"
-                id="validationHeaderIndex" name="headerIndex" #headerIndex="ngModel" [ngModel]="headerIndex.value" />
-        </div>
-        <div class="col-1">
-            <button [disabled]="importForm.invalid" type="submit" class="btn btn-primary btn-md">
-                Enviar
-            </button>
-        </div>
+    <div class="mb-3">
+        <input class="form-control form-control-md" type="file" id="validationCsvPath" (change)="chooseFile($event)"
+            accept=".csv" />
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Categoria" aria-label="Categoria" id="validationCategory"
+            name="category" #category="ngModel" [ngModel]="category.value" />
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Data Inicial" aria-label="Período Inicial"
+            id="validationStartPeriod" name="startPeriod" #startPeriod="ngModel" [ngModel]="startPeriod.value" />
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Data final" aria-label="Período final"
+            id="validationEndPeriod" name="endPeriod" #endPeriod="ngModel" [ngModel]="endPeriod.value" />
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Index de Cabeçalho" aria-label="Index de Cabeçalho"
+            id="validationHeaderIndex" name="headerIndex" #headerIndex="ngModel" [ngModel]="headerIndex.value" />
+    </div>
+    <div>
+        <button [disabled]="importForm.invalid" type="submit" class="btn btn-outline-primary me-1">
+            Importar
+        </button>
+        <button type="button" [routerLink]="['']" class="btn btn-outline-primary">Voltar</button>
     </div>
 </form>
