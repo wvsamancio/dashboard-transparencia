@@ -22,9 +22,11 @@ export class ChartComponent implements OnInit {
   // implement OnInit's `ngOnInit` method
   ngOnInit() {
 
+    //TOOD: implementar formulário para escolher o tipo de gráfico
+    //TODO: implementar formulário para escolher atributos que devem ser mostraddos (previsto, arrecado, etc..)
     const request = {
-      x: "time",
-      type: "line",
+      x: "time", // eixo x é fixo, será por tempo
+      type: "area",
       chartView: [
         {
           value: "previsto"

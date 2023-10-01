@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { ImportComponent } from './components/import/import.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideStorage, getStorage } from '@angular/fire/storage';
-
-import { environment } from 'src/environments/environment';
-
-import { SearchOptionsComponent } from './components/search-options/search-options.component';
-
-import * as firebase from 'firebase/app';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { ChartComponent } from './chart/chart.component';
+
+// Components
+import { AppComponent } from './app.component';
+import { SearchOptionsComponent } from './components/search-options/search-options.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ChartComponent } from './components/chart/chart.component';
+import { CategoryComponent } from './components/category/category.component';
+import { CategoryFormComponent } from './components/category-form/category-form.component';
+
+// Environment
+import { environment } from 'src/environments/environment';
+import * as firebase from 'firebase/app';
 
 firebase.initializeApp(environment.firebase);
 
@@ -28,7 +28,9 @@ firebase.initializeApp(environment.firebase);
     ImportComponent,
     SearchOptionsComponent,
     DashboardComponent,
-    ChartComponent
+    ChartComponent,
+    CategoryComponent,
+    CategoryFormComponent
   ],
   imports: [
     BrowserModule,
