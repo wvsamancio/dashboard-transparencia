@@ -8,11 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ChartComponent implements OnInit {
   @Input() chartContents: any[] = [];
   @Input() chartSubtitle: any = {};
-  @Input() chartRequest: any = {};
-
-  public chartType = [
-    "line", "area", "columm", "bar"
-  ]
+  @Input() chartParams: any = {};
 
   public columns: any[] = [];
 
@@ -36,7 +32,7 @@ export class ChartComponent implements OnInit {
       categories.push(`${elem.startPeriod}-${elem.endPeriod}`);
     });
 
-    this.chartRequest.chartView.map((item: any) => {
+    this.chartParams.chartView.map((item: any) => {
       console.log({ item })
       series.push({
         name: this.chartSubtitle[item.value],
@@ -49,7 +45,7 @@ export class ChartComponent implements OnInit {
 
     this.chartOptions = {
       series: series, chart: {
-        type: this.chartRequest.type,
+        type: this.chartParams.type,
       },
       xaxis: {
         categories: categories

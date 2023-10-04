@@ -67,17 +67,11 @@
             <div class="mb-2">
                 <p><small>Selecione uma ou mais opções para montar o gráfico:</small></p>
             </div>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Tipo de Gráfico
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
+            <select class="form-select mb-2" #type (change)="setChartType(type.value)"
+                aria-label="Default select example">
+                <option selected>Tipo do Gráfico</option>
+                <option *ngFor='let opt of chartTypes' [value]="opt.value">{{ opt.label }}</option>
+            </select>
             <div class="form-check" *ngFor="let column of columns; let i = index">
                 <input class="form-check-input" (change)="setChartOptions(column)" name="{{ column }}" type="checkbox"
                     id="{{column}}">
@@ -88,7 +82,7 @@
         </div>
         <div class="col-8">
             <div *ngIf="chartLoaded">
-                <app-chart [chartContents]="contents" [chartSubtitle]="subtitle" [chartRequest]="request"></app-chart>
+                <app-chart [chartContents]="contents" [chartSubtitle]="subtitle" [chartParams]="params"></app-chart>
             </div>
         </div>
     </div>

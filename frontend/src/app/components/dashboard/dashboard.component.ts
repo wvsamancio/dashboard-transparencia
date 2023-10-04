@@ -19,16 +19,16 @@ export class DashboardComponent {
   public category: Category = {} as Category;
   public chartTypes: any[] = [
     { value: "line", label: "Linha" },
-    { value: "area", label: "Area" }
+    { value: "area", label: "Área" },
+    { value: "bar", label: "Barra" },
+    { value: "scatter", label: "Espalhado" }
   ];
-  public request: any = { // request veio para cá
-    x: "time",
+  public params: any = { // request veio para cá
     type: "line",
     chartView: []
   }
 
   constructor(private formBuilder: FormBuilder, private dashboardService: DashboardService, private cdr: ChangeDetectorRef) {
-    //categoria atual no sessionStorage
     let obj = JSON.parse(sessionStorage.getItem('currentCategory') ?? '{}');
     this.category = obj;
   }
@@ -45,18 +45,19 @@ export class DashboardComponent {
 
   setChartOptions(option: any) {
     this.chartLoaded = false;
-    let index = this.request.chartView.findIndex((el: { value: any; }) => el.value === option);
+    let index = this.params.chartView.findIndex((el: { value: any; }) => el.value === option);
 
-    if (index == -1) this.request.chartView.push({ value: option }); // se opção não existe no array -> adicionar
-    else this.request.chartView.splice(index, 1); // se existir no array -> retirar
+    if (index == -1) this.params.chartView.push({ value: option });
+    else this.params.chartView.splice(index, 1);
 
-    this.cdr.detectChanges(); // método angular para forçar nova renderização do componente
+    this.cdr.detectChanges();
     this.chartLoaded = true;
   }
 
-  setChartType(type: any) {
+  setChartType(option: any) {
     this.chartLoaded = false;
-    this.request.type = type;
+    this.params.type = option;
+
     this.cdr.detectChanges();
     this.chartLoaded = true;
   }
