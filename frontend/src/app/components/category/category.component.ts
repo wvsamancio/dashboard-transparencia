@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Category } from 'src/app/interfaces/category';
 import { CategoryService } from 'src/app/services/category.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-category',
@@ -9,7 +11,7 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class CategoryComponent {
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private router: Router) { }
 
   public categories: Category[] = [];
 
@@ -30,6 +32,11 @@ export class CategoryComponent {
         this.categories = this.categories.filter(category => category._id !== id);
       }
     });
+  }
+
+  public openCharts(category: Category): void {
+    sessionStorage.setItem('currentCategory', JSON.stringify(category));
+    this.router.navigate(['/dashboard']);
   }
 
 }

@@ -1,34 +1,43 @@
-<div>
+<div class="container">
     <form (ngSubmit)="onSubmit()">
-        <div *ngFor="let item of items; let i = index">
-            <app-search-options [item]="item"></app-search-options>
+        <h4 class="mb-4">
+            {{category.name}}: {{category.description}}
+        </h4>
+        <div *ngFor="let item of items; let i = index" class="row">
+            <div class="col-8">
+                <app-search-options [item]="item"></app-search-options>
+            </div>
+            <div class="col-4">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button *ngIf="items.length > 1" type="button" class="btn btn-outline-danger mt-2"
+                        (click)="removeItemRow(i)">
+                        <i class="bi bi-x-lg"></i> Remover
+                    </button>
+                    <button *ngIf="(i+1) == items.length" type="button" class="btn btn-outline-primary mt-2"
+                        (click)="addItemRow()">
+                        <i class="bi bi-plus-circle"></i> Adicionar
+                    </button>
+                </div>
+            </div>
+
         </div>
-        <div class="mt-2">
-            <div class="d-flex justify-content-between">
-                <div class="d-flex justify-content-between">
-                    <button type="submit" class="btn btn-outline-primary me-1">
-                        Buscar dados
-                    </button>
-                    <button type="submit" [routerLink]="['']" class="btn btn-outline-primary">
-                        Voltar
-                    </button>
-                </div>
-                <div>
-                    <button type="button" class="btn btn-outline-primary" (click)="addItemRow()">Adicionar mais
-                        campos</button>
-                    <button *ngIf="items.length > 1" type="button" class="btn btn-outline-danger ms-1"
-                        (click)="removeItemRow(1)">
-                        Remover
-                    </button>
-                </div>
+        <div class="mt-4">
+            <div class="gap-2 d-md-flex justify-content-md-start">
+                <button type="submit" [routerLink]="['']" class="btn btn-outline-primary">
+                    Voltar
+                </button>
+                <button type="submit" class="btn btn-primary me-1">
+                    Buscar dados
+                </button>
             </div>
         </div>
     </form>
 </div>
 
-<div *ngIf="isLoaded">
+<div class="container" *ngIf="isLoaded">
     <div class="mt-4">
-        <h2>Dados:</h2>
+        <h5>Dados</h5>
+        <hr>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -46,6 +55,41 @@
     </div>
 </div>
 
-<div>
-    <app-chart *ngIf="isLoaded" [chartContents]="contents" [chartSubtitle]="subtitle"></app-chart>
+<div class="container">
+    <div class="row mt-4 justify-content-between" *ngIf="isLoaded">
+        <div class="col-12">
+            <div>
+                <h5 class="mb-4">Gráfico</h5>
+                <hr>
+            </div>
+        </div>
+        <div class="col-4 pb-4">
+            <div class="mb-2">
+                <p><small>Selecione uma ou mais opções para montar o gráfico:</small></p>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Tipo de Gráfico
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+            <div class="form-check" *ngFor="let column of columns; let i = index">
+                <input class="form-check-input" (change)="setChartOptions(column)" name="{{ column }}" type="checkbox"
+                    id="{{column}}">
+                <label class="form-check-label" for="{{column}}">
+                    {{subtitle[column]}}
+                </label>
+            </div>
+        </div>
+        <div class="col-8">
+            <div *ngIf="chartLoaded">
+                <app-chart [chartContents]="contents" [chartSubtitle]="subtitle" [chartRequest]="request"></app-chart>
+            </div>
+        </div>
+    </div>
 </div>

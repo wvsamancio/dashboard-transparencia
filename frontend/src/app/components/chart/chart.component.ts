@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ChartComponent implements OnInit {
   @Input() chartContents: any[] = [];
   @Input() chartSubtitle: any = {};
+  @Input() chartRequest: any = {};
 
   public chartType = [
     "line", "area", "columm", "bar"
@@ -24,18 +25,7 @@ export class ChartComponent implements OnInit {
 
     //TOOD: implementar formulário para escolher o tipo de gráfico
     //TODO: implementar formulário para escolher atributos que devem ser mostraddos (previsto, arrecado, etc..)
-    const request = {
-      x: "time", // eixo x é fixo, será por tempo
-      type: "area",
-      chartView: [
-        {
-          value: "previsto"
-        },
-        {
-          value: "arrecadado"
-        }
-      ]
-    }
+
 
     let series: { name: string; data: any[]; }[] = [];
     let categories: string[] = [];
@@ -46,16 +36,20 @@ export class ChartComponent implements OnInit {
       categories.push(`${elem.startPeriod}-${elem.endPeriod}`);
     });
 
-    request.chartView.map((item: any) => {
+    this.chartRequest.chartView.map((item: any) => {
+      console.log({ item })
       series.push({
         name: this.chartSubtitle[item.value],
         data: this.chartContents.map((elem: any) => elem[item.value])
       });
+
     });
+
+    console.log(series);
 
     this.chartOptions = {
       series: series, chart: {
-        type: request.type,
+        type: this.chartRequest.type,
       },
       xaxis: {
         categories: categories

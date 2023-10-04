@@ -13,7 +13,7 @@
                     <td>{{ category.name }}</td>
                     <td>{{ category.description }}</td>
                     <td>
-                        <button type="button" [routerLink]="['/dashboard']"
+                        <button type="button" (click)="openCharts(category)"
                             class="btn btn-outline-primary mx-1">Gráficos</button>
                         <button type="button" [routerLink]="['/import']"
                             class="btn btn-outline-primary mx-1">Dados</button>
