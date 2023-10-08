@@ -23,7 +23,7 @@ export class DashboardComponent {
     { value: "bar", label: "Barra" },
     { value: "scatter", label: "Espalhado" }
   ];
-  public params: any = { // request veio para cá
+  public params: any = {
     type: "line",
     chartView: []
   }
@@ -57,15 +57,17 @@ export class DashboardComponent {
   setChartType(option: any) {
     this.chartLoaded = false;
     this.params.type = option;
-
     this.cdr.detectChanges();
     this.chartLoaded = true;
   }
 
   onSubmit(): void {
     this.isLoaded = false;
-    const query = { query: this.items };
-    this.dashboardService.dynamicQuery(query).subscribe({
+    const query = {
+      category: this.category.name,
+      items: this.items
+    };
+    this.dashboardService.dynamicQuery({ query }).subscribe({
       next: (next) => {
         this.subtitle = next[0].subtitle;
         this.columns = Object.keys(this.subtitle);

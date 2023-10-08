@@ -11,7 +11,6 @@ const getUsers = async () => {
 
 const create = async ({ name, email, password }) => {
   const db = await connectionMongoDb.connect();
-
   await db
     .db(database)
     .collection("users")

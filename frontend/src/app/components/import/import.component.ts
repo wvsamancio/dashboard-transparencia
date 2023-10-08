@@ -9,6 +9,7 @@ import {
   ref,
   uploadBytesResumable,
 } from '@angular/fire/storage';
+import { Category } from 'src/app/interfaces/category';
 
 @Component({
   selector: 'app-import',
@@ -16,6 +17,7 @@ import {
   styleUrls: ['./import.component.css'],
 })
 export class ImportComponent {
+  public category: Category = {} as Category;
   private document: Document = {} as Document;
   private csvSaved: Document = {} as Document;
   public success: boolean = false;
@@ -24,7 +26,10 @@ export class ImportComponent {
   constructor(
     private importService: ImportService,
     private afStorage: Storage
-  ) { }
+  ) {
+    let obj = JSON.parse(sessionStorage.getItem('currentCategory') ?? '{}');
+    this.category = obj;
+  }
 
   public onSubmit(importForm: NgForm): void {
     const storageRef = ref(this.afStorage, 'csv/' + this.file.name);
@@ -43,7 +48,7 @@ export class ImportComponent {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           this.document.url = downloadURL;
-          this.document.category = importForm.value.category;
+          this.document.category = this.category.name;
           this.document.startPeriod = importForm.value.startPeriod;
           this.document.endPeriod = importForm.value.endPeriod;
           this.document.headerIndex = importForm.value.headerIndex;

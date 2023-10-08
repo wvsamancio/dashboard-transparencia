@@ -13,6 +13,7 @@ export class SearchOptionsComponent {
     value: '',
   };
 
+  public category: any = {};
   public contents: Array<any> = [];
   public opt: Array<string> = [];
 
@@ -27,10 +28,13 @@ export class SearchOptionsComponent {
     { value: 'nin', viewValue: 'não contém' }
   ];
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService) {
+    let obj = JSON.parse(sessionStorage.getItem('currentCategory') ?? '{}');
+    this.category = { category: obj.name };
+  }
 
   ngOnInit(): void {
-    this.dashboardService.getContents().subscribe({
+    this.dashboardService.getContents(this.category).subscribe({
       next: (next) => {
         this.contents = next;
         for (let key in this.contents[0].subtitle) {

@@ -15,8 +15,8 @@
                     <td>
                         <button type="button" (click)="openCharts(category)"
                             class="btn btn-outline-primary mx-1">Gráficos</button>
-                        <button type="button" [routerLink]="['/import']"
-                            class="btn btn-outline-primary mx-1">Dados</button>
+                        <button type="button" (click)="openImport(category)"
+                            class=" btn btn-outline-primary mx-1">Dados</button>
                         <button type="button" class="btn btn-outline-danger mx-1"
                             (click)="delete(category._id)">Delete</button>
                     </td>

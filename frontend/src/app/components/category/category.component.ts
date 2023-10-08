@@ -34,6 +34,11 @@ export class CategoryComponent {
     });
   }
 
+  public openImport(category: Category): void {
+    sessionStorage.setItem('currentCategory', JSON.stringify(category));
+    this.router.navigate(['/import']);
+  }
+
   public openCharts(category: Category): void {
     sessionStorage.setItem('currentCategory', JSON.stringify(category));
     this.router.navigate(['/dashboard']);

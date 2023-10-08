@@ -25,8 +25,8 @@ router.put("/users/:id", userValidator.validateBody, userController.updateById);
 router.post("/import", importController.importCsv);
 
 // contents
-router.get("/contents", contentController.getContents);
-router.post("/contents", contentController.dynamicQuery);
+router.post("/contents", contentController.getContents);
+router.post("/preview", contentController.dynamicQuery);
 
 // categories
 router.get("/categories", categoryController.getCategories);

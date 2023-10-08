@@ -12,16 +12,15 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  public getContents(): Observable<Document[]> {
-    return this.http.get<Document[]>(`${this.url}/contents`).pipe(
+  public getContents(category: string): Observable<Document[]> {
+    return this.http.post<Document[]>(`${this.url}/contents`, category).pipe(
       response => response,
       error => error
     );
   }
 
   public dynamicQuery(query: any): Observable<any[]> {
-    console.log(query);
-    return this.http.post<any[]>(`${this.url}/contents`, query).pipe(
+    return this.http.post<any[]>(`${this.url}/preview`, query).pipe(
       response => response,
       error => error
     );

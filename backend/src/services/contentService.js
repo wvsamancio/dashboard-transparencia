@@ -10,9 +10,10 @@ const buildDynamicPipeline = ({ query }) => {
   const pipeline = [
     {
       $match: {
+        category: query.category,
         data: {
           $elemMatch: {
-            $and: query.map((condition) => {
+            $and: query.items.map((condition) => {
               return {
                 [condition.field]: {
                   [`$${condition.operation}`]: condition.value,
@@ -34,7 +35,7 @@ const buildDynamicPipeline = ({ query }) => {
             input: "$data",
             as: "item",
             cond: {
-              $and: query.map((condition) => {
+              $and: query.items.map((condition) => {
                 return {
                   [`$${condition.operation}`]: [
                     "$$item." + condition.field,
