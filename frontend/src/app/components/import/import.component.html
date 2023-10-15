@@ -15,10 +15,13 @@
         <input type="text" class="form-control" placeholder="Index de Cabeçalho" aria-label="Index de Cabeçalho"
             id="validationHeaderIndex" name="headerIndex" #headerIndex="ngModel" [ngModel]="headerIndex.value" />
     </div>
-    <div>
-        <button [disabled]="importForm.invalid" type="submit" class="btn btn-outline-primary me-1">
-            Importar
-        </button>
-        <button type="button" [routerLink]="['']" class="btn btn-outline-primary">Voltar</button>
+    <div class="mt-4 gap-2 d-md-flex justify-content-md-end">
+        <!-- <button type="button" [routerLink]="['']" class="btn btn-outline-primary">Voltar</button>-->
+        <!-- <button [disabled]="importForm.invalid" type="submit" class="btn btn-success me-1">
+            Importar Arquivo
+        </button> -->
+
+        <app-submit-button (submitClicked)="onSubmit(importForm)" [title]="'Importar Arquivo'"
+            [isLoading]="isLoading"></app-submit-button>
     </div>
 </form>

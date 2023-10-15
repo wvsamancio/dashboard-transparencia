@@ -15,10 +15,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { CategoryComponent } from './components/category/category.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
+import { SubmitButtonComponent } from './components/submit-button/submit-button.component';
 
 // Environment
 import { environment } from 'src/environments/environment';
 import * as firebase from 'firebase/app';
+
 
 firebase.initializeApp(environment.firebase);
 
@@ -30,7 +32,8 @@ firebase.initializeApp(environment.firebase);
     DashboardComponent,
     ChartComponent,
     CategoryComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    SubmitButtonComponent
   ],
   imports: [
     BrowserModule,

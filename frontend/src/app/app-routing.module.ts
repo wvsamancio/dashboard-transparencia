@@ -6,10 +6,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ImportComponent } from './components/import/import.component';
 
 const routes: Routes = [
-  { path: '', component: CategoryComponent },
-  { path: 'categories', component: CategoryFormComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'import', component: ImportComponent },
+  { path: '', component: CategoryComponent, data: { title: 'Home' } },
+  { path: 'categories', component: CategoryFormComponent, data: { title: 'Categorias' } },
+  { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
+  { path: 'import', component: ImportComponent, data: { title: 'Importar CSV' } },
 ];
 
 @NgModule({

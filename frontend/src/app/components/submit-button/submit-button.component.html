@@ -1,0 +1,5 @@
+<button type="button" class="btn btn-success" [disabled]="isLoading" (click)="onClick()">
+    <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+    <span *ngIf="isLoading; else buttonContent">Salvando...</span>
+    <ng-template #buttonContent>{{title}}</ng-template>
+</button>

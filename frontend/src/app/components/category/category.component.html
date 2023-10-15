@@ -1,11 +1,19 @@
 <div *ngIf="isLoaded">
+    <div class="m-2 mb-4 d-flex justify-content-between">
+        <h5>Categorias</h5>
+
+        <button type="button" [routerLink]="['/categories']" class="btn btn-outline-primary">
+            <i class="bi bi-plus-circle"></i> Nova Categoria
+        </button>
+
+    </div>
     <div class="m-2">
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Nome:</th>
-                    <th>Descrição:</th>
-                    <th>Ações:</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,16 +24,12 @@
                         <button type="button" (click)="openCharts(category)"
                             class="btn btn-outline-primary mx-1">Gráficos</button>
                         <button type="button" (click)="openImport(category)"
-                            class=" btn btn-outline-primary mx-1">Dados</button>
+                            class=" btn btn-outline-primary mx-1">Importar CSV</button>
                         <button type="button" class="btn btn-outline-danger mx-1"
-                            (click)="delete(category._id)">Delete</button>
+                            (click)="delete(category._id)">Deletar</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-</div>
-
-<div>
-    <button type="button" [routerLink]="['/categories']" class="btn btn-outline-primary">Criar categoria</button>
 </div>

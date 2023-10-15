@@ -104,7 +104,7 @@ const readCsv = async ({
 
     for (let j = 0; j < headerKeys.length; j++) {
       const key = headerKeys[j];
-      row[key] = fields[j].replaceAll('"', "");
+      row[key] = fields[j].replaceAll('"', "").replaceAll("R$", "").trim();
     }
 
     importedRows++;

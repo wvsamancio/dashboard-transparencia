@@ -1,4 +1,4 @@
-<form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)">
+<form #categoryForm="ngForm">
     <div class="mb-3">
         <label for="Name" class="form-label">Nome</label>
         <input type="text" class="form-control" placeholder="Nome da categoria" aria-label="Nome da categoria"
@@ -9,17 +9,17 @@
         <input type="text" class="form-control" placeholder="Descrição da categoria" aria-label="Descrição da categoria"
             id="validationDescription" name="description" #description="ngModel" [ngModel]="description.value">
     </div>
-    <div>
-        <button [disabled]="categoryForm.invalid" type="submit" class="btn btn-outline-primary me-1">
-            Enviar
-        </button>
-        <button type="button" [routerLink]="['']" class="btn btn-outline-primary">Voltar</button>
+    <div class="mt-4 gap-2 d-md-flex justify-content-end">
+        <!--<button type="button" [routerLink]="['']" class="btn btn-outline-primary">Voltar</button>-->
+        <app-submit-button (submitClicked)="onSubmit(categoryForm)" [title]="'Salvar Categoria'"
+            [isLoading]="isLoading"></app-submit-button>
+
     </div>
+
+
 </form>
 
-<div *ngIf="success" class="alert alert-success">
-    Categoria criada com sucesso!
-    <a [routerLink]="[
-        '/categories'
-      ]" class="alert-link">Voltar</a>.
+<div *ngIf="success" class="alert alert-success mt-2">
+    Dataset criada com sucesso!
+    <a [routerLink]="['']" class="alert-link">Voltar</a>.
 </div>

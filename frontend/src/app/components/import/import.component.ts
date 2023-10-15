@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ImportService } from '../../services/import.service';
 import { Document } from '../../interfaces/document';
@@ -22,16 +22,19 @@ export class ImportComponent {
   private csvSaved: Document = {} as Document;
   public success: boolean = false;
   public file: any = {};
+  public isLoading: boolean = false;
 
   constructor(
     private importService: ImportService,
-    private afStorage: Storage
+    private afStorage: Storage,
+    private cdr: ChangeDetectorRef
   ) {
     let obj = JSON.parse(sessionStorage.getItem('currentCategory') ?? '{}');
     this.category = obj;
   }
 
   public onSubmit(importForm: NgForm): void {
+    this.isLoading = true;
     const storageRef = ref(this.afStorage, 'csv/' + this.file.name);
     const uploadTask = uploadBytesResumable(storageRef, this.file);
 
@@ -55,13 +58,23 @@ export class ImportComponent {
 
           this.importService.import(this.document).subscribe({
             next: (next) => {
+              console.log("entrou")
               this.csvSaved = next;
               this.success = true;
               importForm.reset();
+
+              // loading false
+              //TODO: ver se é possível remover esse CDR
+              // TODO: ver como fazer o finally
+              this.isLoading = false;
+              this.cdr.detectChanges();
             },
             error: (error) => {
               console.log(error);
+              this.isLoading = false;
+              this.cdr.detectChanges();
             },
+
           });
         });
       }
