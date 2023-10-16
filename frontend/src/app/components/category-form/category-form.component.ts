@@ -17,6 +17,10 @@ export class CategoryFormComponent {
   public isLoading: boolean = false;
 
   public onSubmit(categoryForm: NgForm): void {
+
+    //
+    //if (categoryForm.invalid) return;
+
     this.isLoading = true;
     categoryForm.value.userEmail = 'wvsamancio@gmail.com';
     this.categoryService.create(categoryForm.value).subscribe({

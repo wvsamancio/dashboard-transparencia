@@ -6,6 +6,10 @@
         <div *ngFor="let item of items; let i = index" class="row">
             <div class="col-8">
                 <app-search-options [item]="item"></app-search-options>
+
+                <small id="itemHelp" class="form-text text-danger"
+                    *ngIf="formHasError && (!item.field || !item.operation || !item.value)">Preencha todos os valores
+                    para realizar a busca</small>
             </div>
             <div class="col-4">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
@@ -19,8 +23,10 @@
                     </button>
                 </div>
             </div>
-
         </div>
+
+
+
         <div class="mt-4">
             <div class="gap-2 d-md-flex justify-content-start">
                 <!--<button type="submit" [routerLink]="['']" class="btn btn-outline-primary">
@@ -38,25 +44,41 @@
     <div class="mt-4">
         <h5>Dados</h5>
         <hr>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col" *ngFor="let column of columns">
-                        {{ subtitle[column] }}
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let content of contents">
-                    <td *ngFor="let column of columns">{{ content[column] }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" *ngFor="let column of columns">
+                            {{ subtitle[column] }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let content of currentContents">
+                        <td *ngFor="let column of columns">{{ content[column] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+        </div>
+        <div class="pagination justify-content-between mt-2">
+            <button class="btn btn-secondary" [disabled]="currentPage === 1" (click)="updatePage('prev')">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            <span> Página {{ currentPage }} | Total de itens: {{contents.length}} </span>
+            <button class="btn btn-secondary" [disabled]="currentPage * itemsPerPage >= contents.length"
+                (click)="updatePage('next')">
+
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="row mt-4 justify-content-between" *ngIf="isLoaded">
+    <div class="row mt-5 justify-content-between" *ngIf="isLoaded">
         <div class="col-12">
             <div>
                 <h5 class="mb-4">Gráfico</h5>
@@ -72,7 +94,7 @@
                 <option selected>Tipo do Gráfico</option>
                 <option *ngFor='let opt of chartTypes' [value]="opt.value">{{ opt.label }}</option>
             </select>
-            <div class="form-check" *ngFor="let column of columns; let i = index">
+            <div class="form-check" *ngFor="let column of filteredColumns; let i = index">
                 <input class="form-check-input" (change)="setChartOptions(column)" name="{{ column }}" type="checkbox"
                     id="{{column}}">
                 <label class="form-check-label" for="{{column}}">
@@ -80,7 +102,7 @@
                 </label>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-12">
             <div *ngIf="chartLoaded">
                 <app-chart [chartContents]="contents" [chartSubtitle]="subtitle" [chartParams]="params"></app-chart>
             </div>

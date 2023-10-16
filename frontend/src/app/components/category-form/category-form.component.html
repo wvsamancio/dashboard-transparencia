@@ -2,12 +2,19 @@
     <div class="mb-3">
         <label for="Name" class="form-label">Nome</label>
         <input type="text" class="form-control" placeholder="Nome da categoria" aria-label="Nome da categoria"
-            id="validationName" name="name" #name="ngModel" [ngModel]="name.value">
+            id="validationName" name="name" #name="ngModel" [ngModel]="name.value" required>
+        <small class="form-text text-danger" *ngIf="name.invalid && name.touched">O nome é
+            obrigatório</small>
+
     </div>
     <div class="mb-3">
         <label for="Descrição" class="form-label">Descrição</label>
         <input type="text" class="form-control" placeholder="Descrição da categoria" aria-label="Descrição da categoria"
-            id="validationDescription" name="description" #description="ngModel" [ngModel]="description.value">
+            id="validationDescription" name="description" #description="ngModel" [ngModel]="description.value" required>
+
+        <small class="form-text text-danger" *ngIf="description.invalid && description.touched">A descrição é
+            obrigatória</small>
+
     </div>
     <div class="mt-4 gap-2 d-md-flex justify-content-end">
         <!--<button type="button" [routerLink]="['']" class="btn btn-outline-primary">Voltar</button>-->

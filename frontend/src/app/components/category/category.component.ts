@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Category } from 'src/app/interfaces/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -26,10 +27,32 @@ export class CategoryComponent {
     });
   }
 
-  public delete(id: string): void {
+  public async delete(id: string): Promise<void> {
+
+    const result = await Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Você não poderá reverter isso!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Continuar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+
+    });
+    if (!result.isConfirmed) return;
+
     this.categoryService.delete(id).subscribe({
       next: () => {
         this.categories = this.categories.filter(category => category._id !== id);
+
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Categoria excluída com sucesso',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     });
   }
@@ -43,5 +66,6 @@ export class CategoryComponent {
     sessionStorage.setItem('currentCategory', JSON.stringify(category));
     this.router.navigate(['/dashboard']);
   }
+
 
 }

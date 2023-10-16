@@ -49,7 +49,7 @@ export class ChartComponent implements OnInit {
       },
       xaxis: {
         categories: categories
-      },
+      }
     };
   }
 }
