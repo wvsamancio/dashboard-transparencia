@@ -30,7 +30,7 @@ const findById = async (id) => {
 const findByEmail = async (email) => {
   const db = await connectionMongoDb.connect();
   const user = await db.db(database).collection("users").findOne({ email });
-  return user ? true : false;
+  return user;
 };
 
 const deleteById = async (id) => {
@@ -51,6 +51,15 @@ const updateById = async (id, { name, email, password }) => {
   return true;
 };
 
+const createToken = async (id) => {
+  const db = await connectionMongoDb.connect();
+  const token = await db
+    .db(database)
+    .collection("tokens")
+    .insertOne({ userId: id });
+  return token;
+}
+
 module.exports = {
   getUsers,
   create,
@@ -58,4 +67,5 @@ module.exports = {
   findByEmail,
   updateById,
   findById,
+  // createToken
 };
