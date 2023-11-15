@@ -20,12 +20,10 @@ export class SearchOptionsComponent {
   public operations = [
     { value: 'eq', viewValue: 'igual a' },
     { value: 'ne', viewValue: 'diferente de' },
-    { value: 'lt', viewValue: 'nenor que' },
+    { value: 'lt', viewValue: 'menor que' },
     { value: 'lte', viewValue: 'menor ou igual que' },
     { value: 'gt', viewValue: 'maior que' },
-    { value: 'gte', viewValue: 'maior ou igual que' },
-    { value: 'in', viewValue: 'contém' },
-    { value: 'nin', viewValue: 'não contém' }
+    { value: 'gte', viewValue: 'maior ou igual que' }
   ];
 
   constructor(private dashboardService: DashboardService) {

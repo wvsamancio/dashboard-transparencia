@@ -78,6 +78,8 @@ const readCsv = async ({
   endPeriod,
   headerIndex,
 }) => {
+  const startTime = new Date();
+
   const fileContent = fs.readFileSync(filePath, "utf8");
   const lines = fileContent.split("\n");
 
@@ -116,6 +118,11 @@ const readCsv = async ({
   document.subtitle = subtitle;
 
   await importModel.importCsv(document);
+
+  const endTime = new Date();
+  const duration = (endTime - startTime) / 1000;
+
+  console.log(`CSV imported in ${duration} seconds`);
 };
 
 const deleteFile = ({ filePath }) => {

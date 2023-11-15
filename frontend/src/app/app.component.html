@@ -4,6 +4,13 @@
             <button class="btn btn-transparent text-white" (click)="returnHome()">
                 <i class="bi bi-bar-chart me-2"></i> Dashboard Transparência
             </button>
+            <!-- <div class="ml-auto" *ngIf="!authenticated">
+                <button class="btn btn-transparent text-white" [routerLink]="['/login']">Entrar</button>
+                <button class="btn btn-transparent text-white" [routerLink]="['/register']">Cadastrar</button>
+            </div>
+            <div class="ml-auto" *ngIf="authenticated" (click)="logout()">
+                <button class="btn btn-transparent text-white" [routerLink]="['/']">Sair</button>
+            </div> -->
         </div>
     </nav>
 </header>

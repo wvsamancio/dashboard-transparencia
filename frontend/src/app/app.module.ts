@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { ImportComponent } from './components/import/import.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideStorage, getStorage } from '@angular/fire/storage';
@@ -20,6 +20,9 @@ import { SubmitButtonComponent } from './components/submit-button/submit-button.
 // Environment
 import { environment } from 'src/environments/environment';
 import * as firebase from 'firebase/app';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 firebase.initializeApp(environment.firebase);
@@ -33,7 +36,9 @@ firebase.initializeApp(environment.firebase);
     ChartComponent,
     CategoryComponent,
     CategoryFormComponent,
-    SubmitButtonComponent
+    SubmitButtonComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,13 @@ firebase.initializeApp(environment.firebase);
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage())
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

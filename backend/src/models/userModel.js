@@ -51,21 +51,11 @@ const updateById = async (id, { name, email, password }) => {
   return true;
 };
 
-const createToken = async (id) => {
-  const db = await connectionMongoDb.connect();
-  const token = await db
-    .db(database)
-    .collection("tokens")
-    .insertOne({ userId: id });
-  return token;
-}
-
 module.exports = {
   getUsers,
   create,
   deleteById,
   findByEmail,
   updateById,
-  findById,
-  // createToken
+  findById
 };

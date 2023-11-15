@@ -4,7 +4,6 @@ import { CategoryService } from 'src/app/services/category.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',

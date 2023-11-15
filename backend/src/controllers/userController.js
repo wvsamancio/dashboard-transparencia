@@ -55,6 +55,5 @@ module.exports = {
   create,
   findById,
   deleteById,
-  updateById,
-  // createToken
+  updateById
 };

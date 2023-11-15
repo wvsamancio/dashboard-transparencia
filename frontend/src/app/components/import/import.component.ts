@@ -58,13 +58,12 @@ export class ImportComponent {
 
           this.importService.import(this.document).subscribe({
             next: (next) => {
-              console.log("entrou")
               this.csvSaved = next;
               this.success = true;
               importForm.reset();
 
               // loading false
-              //TODO: ver se é possível remover esse CDR
+              // TODO: ver se é possível remover esse CDR
               // TODO: ver como fazer o finally
               this.isLoading = false;
               this.cdr.detectChanges();

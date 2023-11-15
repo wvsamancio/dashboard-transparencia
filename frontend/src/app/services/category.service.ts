@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class CategoryService {
 
   private url: string = 'http://localhost:3000'
+  public isLogged: boolean = false;
 
   constructor(private http: HttpClient) { }
 
