@@ -21,12 +21,12 @@
                     <td>{{ category.name }}</td>
                     <td>{{ category.description }}</td>
                     <td>
-                        <button type="button" (click)="openCharts(category)"
-                            class="btn btn-outline-primary mx-1">Gráficos</button>
                         <button type="button" (click)="openImport(category)"
                             class=" btn btn-outline-primary mx-1">Importar CSV</button>
+                        <button type="button" (click)="openCharts(category)"
+                            class="btn btn-outline-primary mx-1">Gráficos</button>
                         <button type="button" class="btn btn-outline-danger mx-1"
-                            (click)="delete(category._id)">Deletar</button>
+                            (click)="delete(category._id)">Remover</button>
                     </td>
                 </tr>
             </tbody>
